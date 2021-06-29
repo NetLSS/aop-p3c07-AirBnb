@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.743466, 127.090881))
         naverMap.moveCamera(cameraUpdate)
+
+        // 현위치 기능
+        val uiSetting = naverMap.uiSettings
+        uiSetting.isLocationButtonEnabled = true
     }
 
     override fun onStart() {
