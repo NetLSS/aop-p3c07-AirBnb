@@ -3,11 +3,17 @@ package com.lilcode.aop.p3c07.airbnb
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory as Gso
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -44,11 +50,48 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             FusedLocationSource(this@MainActivity, LOCATION_PERMISSION_REQUEST_CODE)
         naverMap.locationSource = locationSource
 
-        val marker = Marker()
-        marker.position = LatLng(37.500493, 127.029740)
-        marker.map = naverMap
-        marker.icon = MarkerIcons.BLACK
-        marker.iconTintColor = Color.RED
+//        val marker = Marker()
+//        marker.position = LatLng(37.500493, 127.029740)
+//        marker.map = naverMap
+//        marker.icon = MarkerIcons.BLACK
+//        marker.iconTintColor = Color.RED
+
+        // 지도 다 로드 이후에 가져오기
+        getHouseListFromAPI()
+    }
+
+    private fun getHouseListFromAPI() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://run.mocky.io")
+            .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(HouseService::class.java).also {
+            it.getHouseList()
+                .enqueue(object : Callback<HouseDto> {
+                    override fun onResponse(call: Call<HouseDto>, response: Response<HouseDto>) {
+                        if (response.isSuccessful.not()) {
+                            // fail
+                            Log.d("Retrofit", "실패1")
+
+                            return
+                        }
+
+                        response.body()?.let { dto ->
+                            Log.d("Retrofit", dto.toString())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<HouseDto>, t: Throwable) {
+                        // 실패 처리 구현;
+                        Log.d("Retrofit", "실패2")
+                        Log.d("Retrofit", t.stackTraceToString())
+
+
+                    }
+
+                })
+        }
     }
 
     override fun onRequestPermissionsResult(
