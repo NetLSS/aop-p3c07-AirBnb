@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         naverMap.maxZoom = 18.0
         naverMap.minZoom = 10.0
 
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.743466, 127.090881))
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.497801, 127.027591))
         naverMap.moveCamera(cameraUpdate)
 
         // 현위치 기능
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         }
 
                         response.body()?.let { dto ->
-                            Log.d("Retrofit", dto.toString())
+                            upfateMarker(dto.items)
                         }
                     }
 
@@ -91,6 +91,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
 
                 })
+        }
+    }
+
+    private fun upfateMarker(houses: List<HouseModel>){
+        houses.forEach { house ->
+
+            val marker = Marker()
+            marker.position = LatLng(house.lat, house.lng)
+            // todo marker.onClickListener
+            marker.map = naverMap
+            marker.tag = house.id
+            marker.icon = MarkerIcons.BLACK
+            marker.iconTintColor = Color.RED
+
         }
     }
 
