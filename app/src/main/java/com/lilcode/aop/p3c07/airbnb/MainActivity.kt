@@ -4,6 +4,8 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         findViewById(R.id.houseViewPager)
     }
     private val viewPagerAdapter = HouseViewPagerAdapter()
+    private val recyclerViewAdapter = HouseListAdapter()
+
+    private val recyclerView:RecyclerView by lazy{
+        findViewById(R.id.recyclerView)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +44,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mapView.getMapAsync(this)
 
         viewPager.adapter = viewPagerAdapter
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onMapReady(map: NaverMap) {
@@ -86,6 +95,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         response.body()?.let { dto ->
                             updateMarker(dto.items)
                             viewPagerAdapter.submitList(dto.items)
+                            recyclerViewAdapter.submitList(dto.items)
                         }
                     }
 
