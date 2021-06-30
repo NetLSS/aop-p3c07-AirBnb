@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import com.naver.maps.map.widget.LocationButtonView
@@ -18,7 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, Overlay.OnClickListener {
 
     private val mapView: MapView by lazy {
         findViewById(R.id.mapView)
@@ -135,7 +136,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val marker = Marker()
             marker.position = LatLng(house.lat, house.lng)
-            // todo marker.onClickListener
+            marker.onClickListener = this
             marker.map = naverMap
             marker.tag = house.id
             marker.icon = MarkerIcons.BLACK
@@ -199,5 +200,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+    }
+
+    override fun onClick(overlay: Overlay): Boolean {
+        // overlay : 마커
+
+        val selectedModel = viewPagerAdapter.currentList.firstOrNull{
+            it.id == overlay.tag
+        }
+        selectedModel?.let{
+            val position = viewPagerAdapter.currentList.indexOf(it)
+            viewPager.currentItem = position
+        }
+        return true
     }
 }
