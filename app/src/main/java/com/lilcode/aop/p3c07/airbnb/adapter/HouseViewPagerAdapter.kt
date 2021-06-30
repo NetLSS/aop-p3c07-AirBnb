@@ -1,4 +1,4 @@
-package com.lilcode.aop.p3c07.airbnb
+package com.lilcode.aop.p3c07.airbnb.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.lilcode.aop.p3c07.airbnb.R
+import com.lilcode.aop.p3c07.airbnb.retrofit.HouseModel
 
-class HouseViewPagerAdapter(val itemClicked: (HouseModel)->Unit) :
+class HouseViewPagerAdapter(val itemClicked: (HouseModel) -> Unit) :
     ListAdapter<HouseModel, HouseViewPagerAdapter.ItemViewHolder>(differ) {
     inner class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(houseModel: HouseModel) {
@@ -21,7 +23,7 @@ class HouseViewPagerAdapter(val itemClicked: (HouseModel)->Unit) :
             titleTextView.text = houseModel.title
             priceTextView.text = houseModel.price
 
-            view.setOnClickListener{
+            view.setOnClickListener {
                 itemClicked(houseModel)
             }
 
