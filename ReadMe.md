@@ -27,6 +27,7 @@
 
 - **Naver Map API** 사용하기
 - **ViewPager2** 사용하기
+  - 내부 레이아웃이 match parent 이어야 죽지 않음.
 - **FrameLayout** 알아보기
 - **CoordinatorLayout** 사용하기
   - 프레임 레이아웃에 강력한 기능을 더한 레이아웃
