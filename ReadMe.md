@@ -1,5 +1,7 @@
 # aop-part3-chapter07 - 에어비엔비
 
+- 해당 프로젝트의 자세한 내용은 저의 [블로그 글](https://whyprogrammer.tistory.com/600)을 통해 확인할 수도 있습니다.
+
 # 목차
 
 1. 인트로 (완성앱 & 구현 기능 소개)
