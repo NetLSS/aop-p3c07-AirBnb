@@ -25,7 +25,7 @@
         android:layout_margin="12dp"
         android:id="@+id/currentLocationButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <include layout="@layout/bottom_sheet" />
 

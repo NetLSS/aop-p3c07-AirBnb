@@ -32,11 +32,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private val viewPagerAdapter = HouseViewPagerAdapter()
     private val recyclerViewAdapter = HouseListAdapter()
 
-    private val recyclerView:RecyclerView by lazy{
+    private val recyclerView: RecyclerView by lazy {
         findViewById(R.id.recyclerView)
     }
 
-    private val currentLocationButton:LocationButtonView by lazy{
+    private val currentLocationButton: LocationButtonView by lazy {
         findViewById(R.id.currentLocationButton)
     }
 
@@ -54,13 +54,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         // page 변경시 처리
-        viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
                 val selectedHouseModel = viewPagerAdapter.currentList[position]
-                val cameraUpdate = CameraUpdate.scrollTo(LatLng(selectedHouseModel.lat,selectedHouseModel.lng))
-                    .animate(CameraAnimation.Easing)
+                val cameraUpdate =
+                    CameraUpdate.scrollTo(LatLng(selectedHouseModel.lat, selectedHouseModel.lng))
+                        .animate(CameraAnimation.Easing)
                 naverMap.moveCamera(cameraUpdate)
             }
         })
