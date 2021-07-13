@@ -17,9 +17,11 @@
 
 # 결과화면
 
-![1](./screenshot/1.png)
+![1](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzqI23%2Fbtq8rfXEDIe%2FDFg5AkkdZbPHgZj6xvKtrk%2Fimg.png)
 
-![2](./screenshot/2.png)
+![2](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbk8xT0%2Fbtq8v2a8lYL%2FdaP4SIq4091wDE3zeoGDH1%2Fimg.png)
+
+![3](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWkhh6%2Fbtq8qWcos3G%2FMBCM5fUM76lyeSAuCyWPd0%2Fimg.png)
 
 # 이 챕터를 통해 배우는 것
 
